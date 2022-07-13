@@ -1,0 +1,19 @@
+<form [formGroup]="form" style="display: flex; flex-direction: column; align-items: center;" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Titulo</mat-label>
+        <input formControlName="title" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-select formControlName="tags" multiple>
+            <mat-option *ngFor="let tag of tagsList" [value]="tag">{{tag}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Textarea</mat-label>
+        <textarea formControlName="description" matInput></textarea>
+    </mat-form-field>
+    <button mat-button color="primary" type="submit">Confirmar</button>
+
+</form>

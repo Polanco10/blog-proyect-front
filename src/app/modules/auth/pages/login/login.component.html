@@ -1,0 +1,24 @@
+<form [formGroup]="form" style="display: flex; flex-direction: column; align-items: center;" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input formControlName="email" matInput type="email">
+
+    </mat-form-field>
+    <div *ngIf="email?.status==='INVALID' && submitted">
+        <div *ngIf="email?.errors?.['required']"> Debe ingresar un correo</div>
+        <div *ngIf="email?.errors?.['email']"> Debe ingresar un correo válido </div>
+    </div>
+
+
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input formControlName="password" matInput type="password" autocomplete="on">
+    </mat-form-field>
+    <div *ngIf="password?.status==='INVALID' && submitted">
+        <div *ngIf="password?.errors?.['required']"> Debe ingresar una contraseña</div>
+    </div>
+    <div *ngIf="message">{{message}} </div>
+
+    <button mat-button color="primary" type="submit">Confirmar</button>
+
+</form>

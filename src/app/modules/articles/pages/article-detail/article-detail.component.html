@@ -1,0 +1,8 @@
+<div style="display: flex; flex-direction:column; padding:1rem; justify-content:center;align-items:center"
+    *ngIf="article">
+    <h1>{{article.title}}</h1>
+    <h3> {{article.author}}</h3>
+    <h6> {{article.tags}} - {{article.category}}</h6>
+    <h6> {{article.createdAt}}</h6>
+    <p> {{ article.description}}</p>
+</div>
