@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { IUser } from '../../models/auth.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { IAuth } from '../../models/auth.interface';
 import { AuthService } from '../../services/auth.service';
+import { loginStart } from '../../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -18,23 +21,24 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit(): void {
   }
 
   submit() {
     this.submitted = true;
-    const user: IUser = {
+    const auth: IAuth = {
       email: this.form.value.email!,
       password: this.form.value.password!
     }
     if (this.form.valid) {
-      console.log(this.form)
+      console.log(auth)
+      this.store.dispatch(loginStart({ auth }));
 
-      this.authService.login(user).subscribe(res => {
-        this.message = res.message
-      })
+      // this.authService.login(user).subscribe(res => {
+      //   this.message = res.message
+      // })
     }
   }
   get email() {

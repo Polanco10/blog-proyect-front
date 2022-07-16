@@ -14,7 +14,10 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './core/interceptor/auth-interceptor.service';
-
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { AuthEffects } from './modules/auth/store/auth.effects';
+import { AuthReducer } from './modules/auth/store/auth.reducer';
 
 
 
@@ -32,7 +35,9 @@ import { AuthInterceptorService } from './core/interceptor/auth-interceptor.serv
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({ auth: AuthReducer }),
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
