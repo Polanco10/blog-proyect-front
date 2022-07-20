@@ -5,7 +5,7 @@
     <span>My App</span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
-        [routerLink]="['/articles/new']">
+        [routerLink]="['/articles/new']" *ngIf="isAuthenticated">
         <mat-icon>create_new_folder</mat-icon>
     </button>
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
@@ -16,12 +16,12 @@
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="['/auth/login']" *ngIf="!isAuthenticated;else notAuthenticated">
+        <button mat-menu-item [routerLink]="['/auth/login']" *ngIf="!isAuthenticated;else Authenticated">
             <mat-icon>person</mat-icon>
             <span>Login</span>
         </button>
-        <ng-template #notAuthenticated>
-            <button mat-menu-item>
+        <ng-template #Authenticated>
+            <button mat-menu-item (click)="onLogout($event)">
                 <mat-icon>exit_to_app</mat-icon>
                 <span>Logout</span>
             </button>
